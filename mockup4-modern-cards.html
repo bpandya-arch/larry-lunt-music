@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Larry Lunt | All the Music. One Place.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ========== RESET & BASE ========== */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg: #f5f5f7;
+    --primary: #6c63ff;
+    --primary-dark: #5a52d5;
+    --primary-light: #8b85ff;
+    --secondary: #ff6b6b;
+    --secondary-dark: #e55a5a;
+    --card-bg: #ffffff;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #aeaeb2;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    --shadow-hover: 0 12px 48px rgba(108,99,255,0.18);
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 100px;
+    --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --nav-height: 72px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ========== SCROLLBAR ========== */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    border-radius: 100px;
+  }
+
+  /* ========== STICKY NAV ========== */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(20px, 4vw, 48px);
+    background: rgba(245, 245, 247, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: var(--transition);
+  }
+
+  .nav.scrolled {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nav-logo {
+    font-weight: 800;
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    transition: var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+    background: rgba(108, 99, 255, 0.08);
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(var(--nav-height) + 40px) 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--primary), #8b5cf6, var(--secondary), #ff8e53);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 70%, rgba(255,107,107,0.15) 0%, transparent 50%);
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating shapes */
+  .hero-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    background: white;
+    animation: float 20s ease-in-out infinite;
+  }
+  .hero-shape:nth-child(2) { width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: -3s; }
+  .hero-shape:nth-child(3) { width: 200px; height: 200px; bottom: 15%; right: 10%; animation-delay: -7s; }
+  .hero-shape:nth-child(4) { width: 150px; height: 150px; top: 40%; right: 20%; animation-delay: -11s; }
+  .hero-shape:nth-child(5) { width: 100px; height: 100px; bottom: 30%; left: 15%; animation-delay: -5s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-30px) rotate(5deg); }
+    66% { transform: translateY(20px) rotate(-3deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-pill);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .hero-badge .dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 900;
+    color: white;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: rgba(255,255,255,0.85);
+    font-weight: 400;
+    margin-bottom: 40px;
+    letter-spacing: -0.3px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    background: white;
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+
+  .hero-cta svg {
+    width: 20px;
+    height: 20px;
+    animation: playBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes playBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    animation: scrollHint 2s ease-in-out infinite;
+  }
+
+  .hero-scroll svg {
+    width: 28px;
+    height: 28px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  @keyframes scrollHint {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+    50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
+  }
+
+  /* ========== QUICK STATS ========== */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 24px;
+    margin-top: -36px;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+  }
+
+  .stat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--card-bg);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .stat-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    color: var(--primary);
+  }
+
+  .stat-chip svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .stat-chip .stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .stat-chip .stat-icon.purple { background: rgba(108, 99, 255, 0.1); color: var(--primary); }
+  .stat-chip .stat-icon.coral { background: rgba(255, 107, 107, 0.1); color: var(--secondary); }
+  .stat-chip .stat-icon.green { background: rgba(74, 222, 128, 0.1); color: #22c55e; }
+
+  /* ========== SECTIONS ========== */
+  .section {
+    padding: 80px clamp(20px, 4vw, 48px);
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: rgba(108, 99, 255, 0.08);
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ========== SEARCH / FILTER ========== */
+  .search-wrapper {
+    max-width: 560px;
+    margin: 0 auto 48px;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 18px 24px 18px 56px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: var(--card-bg);
+    border: 2px solid rgba(0,0,0,0.06);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-sm);
+    outline: none;
+    transition: var(--transition);
+  }
+
+  .search-input::placeholder {
+    color: var(--text-light);
+    font-weight: 400;
+  }
+
+  .search-input:focus {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md), 0 0 0 4px rgba(108, 99, 255, 0.1);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: var(--text-light);
+    pointer-events: none;
+    transition: var(--transition);
+  }
+
+  .search-input:focus ~ .search-icon {
+    color: var(--primary);
+  }
+
+  .search-clear {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0,0,0,0.06);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1;
+    transition: var(--transition);
+  }
+
+  .search-clear:hover {
+    background: var(--secondary);
+    color: white;
+  }
+
+  .search-clear.visible {
+    display: flex;
+  }
+
+  .filter-count {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: -36px;
+    margin-bottom: 36px;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .filter-count.visible {
+    opacity: 1;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 60px 24px;
+    display: none;
+  }
+
+  .no-results.visible {
+    display: block;
+  }
+
+  .no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.4;
+  }
+
+  .no-results h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .no-results p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  /* ========== VIDEO GRID ========== */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .video-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .video-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.6s ease-out;
+  }
+
+  .video-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .video-card.hidden {
+    display: none;
+  }
+
+  .video-embed {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e8e6ff, #ffe6e6);
+  }
+
+  .video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-info {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .video-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(108,99,255,0.08), rgba(255,107,107,0.08));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .video-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+    line-height: 1.3;
+  }
+
+  /* ========== SPOTIFY SECTION ========== */
+  .spotify-section {
+    padding: 80px clamp(20px, 4vw, 48px);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .spotify-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0,0,0,0.04);
+    padding: 32px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .spotify-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .spotify-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .spotify-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #1db954;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .spotify-icon-wrapper svg {
+    width: 28px;
+    height: 28px;
+    color: white;
+  }
+
+  .spotify-header-text h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+  }
+
+  .spotify-header-text p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .spotify-embed {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .spotify-embed iframe {
+    border: none;
+    border-radius: var(--radius-sm);
+  }
+
+  /* ========== CONNECT SECTION ========== */
+  .connect-section {
+    padding: 80px clamp(20px, 4vw, 48px) 100px;
+    text-align: center;
+  }
+
+  .connect-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--primary), #8b5cf6, var(--secondary));
+    border-radius: var(--radius-lg);
+    padding: 56px 40px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .connect-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .connect-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.12) 0%, transparent 50%);
+  }
+
+  .connect-card h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .connect-card p {
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .connect-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .connect-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+  }
+
+  .connect-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .connect-btn.yt {
+    background: white;
+    color: #ff0000;
+  }
+
+  .connect-btn.yt:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .connect-btn.sp {
+    background: white;
+    color: #1db954;
+  }
+
+  .connect-btn.sp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    text-align: center;
+    padding: 32px 24px 40px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .footer-logo {
+    font-weight: 800;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .footer p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  .footer-heart {
+    color: var(--secondary);
+    -webkit-text-fill-color: var(--secondary);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 1024px) {
+    .video-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+
+    .hero h1 {
+      letter-spacing: -1px;
+    }
+
+    .stats-bar {
+      gap: 8px;
+    }
+
+    .stat-chip {
+      padding: 10px 18px;
+      font-size: 0.82rem;
+    }
+
+    .stat-chip .stat-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+    }
+
+    .section {
+      padding: 60px 16px;
+    }
+
+    .spotify-section {
+      padding: 60px 16px;
+    }
+
+    .spotify-card {
+      padding: 20px;
+    }
+
+    .connect-card {
+      padding: 40px 24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .stats-bar {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-chip {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+    }
+  }
+
+  /* ========== ANIMATIONS ========== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">Larry Lunt</div>
+  <ul class="nav-links">
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#spotify">Spotify</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Music Collection
+    </div>
+    <h1>Larry Lunt</h1>
+    <p class="hero-subtitle">All the music. One place.</p>
+    <a href="#videos" class="hero-cta">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      Explore Music
+    </a>
+  </div>
+
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ========== QUICK STATS ========== -->
+<div class="stats-bar">
+  <a href="#videos" class="stat-chip fade-in">
+    <div class="stat-icon purple">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m10 9 5 3-5 3V9z"/></svg>
+    </div>
+    19 Videos
+  </a>
+  <a href="#spotify" class="stat-chip fade-in">
+    <div class="stat-icon green">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+    </div>
+    Spotify Artist
+  </a>
+  <a href="https://www.youtube.com/@louielouietv" target="_blank" rel="noopener" class="stat-chip fade-in">
+    <div class="stat-icon coral">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </div>
+    YouTube Channel
+  </a>
+</div>
+
+<!-- ========== VIDEOS SECTION ========== -->
+<section class="section" id="videos">
+  <div class="section-header fade-in">
+    <span class="section-label">Collection</span>
+    <h2 class="section-title">Music Videos</h2>
+    <p class="section-desc">Every song, every video &mdash; all in one place. Browse through Larry's full collection of original music.</p>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrapper fade-in">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search videos by title..." autocomplete="off">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <button class="search-clear" id="searchClear" aria-label="Clear search">&times;</button>
+  </div>
+
+  <div class="filter-count" id="filterCount"></div>
+
+  <div class="no-results" id="noResults">
+    <div class="no-results-icon">&#9835;</div>
+    <h3>No videos found</h3>
+    <p>Try a different search term.</p>
+  </div>
+
+  <!-- Video Grid -->
+  <div class="video-grid" id="videoGrid">
+
+    <div class="video-card" data-title="Shoes">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/pLlcxqnep4Y" title="Shoes" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">01</div>
+        <div class="video-title">Shoes</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="You Are Cordially Invited">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/ewBfHpqvaQw" title="You Are Cordially Invited" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">02</div>
+        <div class="video-title">You Are Cordially Invited</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Smile (short version)">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/wMC-0q-0j-Y" title="Smile (short version)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">03</div>
+        <div class="video-title">Smile (short version)</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Smile (extended version)">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/zqtZ3YP9qX0" title="Smile (extended version)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">04</div>
+        <div class="video-title">Smile (extended version)</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Must Be Wrong">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/Jrz2yVo6AFE" title="Must Be Wrong" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">05</div>
+        <div class="video-title">Must Be Wrong</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="One Leg Mama!">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/f4VI2pi1dik" title="One Leg Mama!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">06</div>
+        <div class="video-title">One Leg Mama!</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Winston">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/KDL-ENFiS58" title="Winston" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">07</div>
+        <div class="video-title">Winston</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="I Feel Fine">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/EqMSepq7OZU" title="I Feel Fine" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">08</div>
+        <div class="video-title">I Feel Fine</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="I Believe in Me">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/9ZbCE4F6oDo" title="I Believe in Me" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">09</div>
+        <div class="video-title">I Believe in Me</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Thank You Granny">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/I-0oElUtXU4" title="Thank You Granny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">10</div>
+        <div class="video-title">Thank You Granny</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="25 Years with You">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/2u-nlpzlXMc" title="25 Years with You" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">11</div>
+        <div class="video-title">25 Years with You</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Songs for Granny 90">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/v-YC-wKJAYE" title="Songs for Granny 90" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">12</div>
+        <div class="video-title">Songs for Granny 90</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Sweet Somebody">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/Fa_68G-tqcA" title="Sweet Somebody" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">13</div>
+        <div class="video-title">Sweet Somebody</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="And Now">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/Gr4HJhZqwTs" title="And Now" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">14</div>
+        <div class="video-title">And Now</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Graduation">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/nkrdIDd6So4" title="Graduation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">15</div>
+        <div class="video-title">Graduation</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Thats What I Like About You">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/3h49cWEJoXY" title="Thats What I Like About You" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">16</div>
+        <div class="video-title">Thats What I Like About You</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Songs for Granny">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/NQb9Xf3LY_c" title="Songs for Granny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">17</div>
+        <div class="video-title">Songs for Granny</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="Relax Vax">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/9XdA9DvdFu0" title="Relax Vax" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">18</div>
+        <div class="video-title">Relax Vax</div>
+      </div>
+    </div>
+
+    <div class="video-card" data-title="LouieLouie Animation">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/ssaoS4eFKj0" title="LouieLouie Animation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-number">19</div>
+        <div class="video-title">LouieLouie Animation</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== SPOTIFY SECTION ========== -->
+<section class="spotify-section" id="spotify">
+  <div class="section-header fade-in">
+    <span class="section-label">Streaming</span>
+    <h2 class="section-title">Listen on Spotify</h2>
+    <p class="section-desc">Stream Larry's music anywhere, anytime.</p>
+  </div>
+
+  <div class="spotify-card fade-in">
+    <div class="spotify-header">
+      <div class="spotify-icon-wrapper">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </div>
+      <div class="spotify-header-text">
+        <h3>Larry Lunt on Spotify</h3>
+        <p>Full artist profile with all available tracks</p>
+      </div>
+    </div>
+    <div class="spotify-embed">
+      <iframe src="https://open.spotify.com/embed/artist/4K75DMV5j6JKqAqKMCofi6?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" width="100%" height="352" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONNECT SECTION ========== -->
+<section class="connect-section" id="connect">
+  <div class="connect-card fade-in">
+    <h2>Stay Connected</h2>
+    <p>Follow along for new music, videos, and more.</p>
+    <div class="connect-buttons">
+      <a href="https://www.youtube.com/@louielouietv" target="_blank" rel="noopener" class="connect-btn yt">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </a>
+      <a href="https://open.spotify.com/artist/4K75DMV5j6JKqAqKMCofi6" target="_blank" rel="noopener" class="connect-btn sp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Spotify
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-logo">Larry Lunt</div>
+  <p>Made with <span class="footer-heart">&#9829;</span> for the love of music</p>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+(function() {
+  'use strict';
+
+  // === Nav scroll effect ===
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+
+  function handleNavScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+    lastScroll = scrollY;
+  }
+
+  window.addEventListener('scroll', handleNavScroll, { passive: true });
+
+  // === Intersection Observer for fade-in ===
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60px 0px',
+    threshold: 0.1
+  };
+
+  const fadeObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe fade-in elements
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    fadeObserver.observe(el);
+  });
+
+  // Observe video cards with stagger
+  const videoCards = document.querySelectorAll('.video-card');
+  const cardObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        // Stagger effect based on visible position
+        const card = entry.target;
+        const idx = Array.from(videoCards).indexOf(card);
+        const delay = (idx % 3) * 100; // stagger columns
+        setTimeout(function() {
+          card.classList.add('visible');
+        }, delay);
+        cardObserver.unobserve(card);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.05
+  });
+
+  videoCards.forEach(function(card) {
+    cardObserver.observe(card);
+  });
+
+  // === Search / Filter ===
+  const searchInput = document.getElementById('searchInput');
+  const searchClear = document.getElementById('searchClear');
+  const filterCount = document.getElementById('filterCount');
+  const noResults = document.getElementById('noResults');
+  const grid = document.getElementById('videoGrid');
+  const cards = Array.from(grid.querySelectorAll('.video-card'));
+
+  function filterVideos() {
+    const query = searchInput.value.trim().toLowerCase();
+
+    // Toggle clear button
+    if (query.length > 0) {
+      searchClear.classList.add('visible');
+    } else {
+      searchClear.classList.remove('visible');
+    }
+
+    let visibleCount = 0;
+
+    cards.forEach(function(card) {
+      const title = (card.getAttribute('data-title') || '').toLowerCase();
+      if (query === '' || title.indexOf(query) !== -1) {
+        card.classList.remove('hidden');
+        if (!card.classList.contains('visible')) {
+          card.classList.add('visible');
+        }
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // Show filter count
+    if (query.length > 0) {
+      filterCount.textContent = visibleCount + ' of 19 videos match "' + searchInput.value.trim() + '"';
+      filterCount.classList.add('visible');
+    } else {
+      filterCount.classList.remove('visible');
+    }
+
+    // No results message
+    if (visibleCount === 0 && query.length > 0) {
+      noResults.classList.add('visible');
+    } else {
+      noResults.classList.remove('visible');
+    }
+  }
+
+  searchInput.addEventListener('input', filterVideos);
+
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    filterVideos();
+    searchInput.focus();
+  });
+
+  // === Smooth scroll for anchor links ===
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const offset = nav.offsetHeight + 16;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Larry Lunt | A Lifetime of Music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-deep: #0a0a1a;
+  --bg-card: #0f1029;
+  --bg-nav: rgba(10, 10, 26, 0.85);
+  --accent: #4fc3f7;
+  --accent-glow: rgba(79, 195, 247, 0.4);
+  --accent-dim: rgba(79, 195, 247, 0.15);
+  --white: #ffffff;
+  --white-soft: rgba(255, 255, 255, 0.85);
+  --white-muted: rgba(255, 255, 255, 0.5);
+  --gradient-overlay: linear-gradient(135deg, rgba(10, 10, 26, 0.95) 0%, rgba(15, 16, 41, 0.8) 50%, rgba(10, 10, 26, 0.95) 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg-deep);
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 0 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(79, 195, 247, 0.1);
+}
+
+.nav-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-logo:hover { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.nav-hamburger span {
+  width: 25px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 50%, #0d1033 0%, #0a0a1a 70%);
+}
+
+/* Star field - layer 1 (small stars) */
+.stars, .stars2, .stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.stars {
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 20% 35%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 30% 55%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 40% 75%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 50% 25%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 60% 45%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 70% 65%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 80% 85%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 5% 90%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 25% 80%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 35% 20%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 45% 60%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 55% 40%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 65% 10%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 75% 30%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 85% 50%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 95% 70%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 12% 72%, rgba(255,255,255,0.5), transparent);
+  animation: starDrift 80s linear infinite;
+}
+
+/* Star field - layer 2 (medium stars) */
+.stars2 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 8% 22%, rgba(79,195,247,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 18% 62%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 28% 42%, rgba(79,195,247,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 38% 82%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 48% 12%, rgba(79,195,247,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 58% 52%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 68% 32%, rgba(79,195,247,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 78% 72%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 88% 92%, rgba(79,195,247,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 98% 8%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 33% 28%, rgba(79,195,247,0.4), transparent),
+    radial-gradient(2px 2px at 63% 78%, rgba(79,195,247,0.3), transparent),
+    radial-gradient(2px 2px at 83% 18%, rgba(79,195,247,0.5), transparent);
+  animation: starDrift2 120s linear infinite;
+}
+
+/* Star field - layer 3 (twinkle stars) */
+.stars3 {
+  background-image:
+    radial-gradient(2px 2px at 15% 30%, rgba(79,195,247,0.9), transparent),
+    radial-gradient(2px 2px at 45% 70%, rgba(255,255,255,1), transparent),
+    radial-gradient(2px 2px at 75% 20%, rgba(79,195,247,0.8), transparent),
+    radial-gradient(2px 2px at 25% 90%, rgba(255,255,255,0.9), transparent),
+    radial-gradient(2px 2px at 85% 60%, rgba(79,195,247,0.7), transparent),
+    radial-gradient(2.5px 2.5px at 55% 45%, rgba(255,255,255,1), transparent),
+    radial-gradient(2.5px 2.5px at 92% 35%, rgba(79,195,247,0.8), transparent);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes starDrift {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-30px) translateX(15px); }
+}
+
+@keyframes starDrift2 {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(20px) translateX(-10px); }
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* Atmospheric gradient overlays */
+.hero-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 50%, rgba(79, 195, 247, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 30% 70%, rgba(79, 195, 247, 0.02) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 70% 30%, rgba(100, 120, 255, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-vignette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to top, var(--bg-deep) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.hero-overtitle {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 1s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 12vw, 10rem);
+  letter-spacing: 12px;
+  line-height: 0.95;
+  color: var(--white);
+  text-shadow: 0 0 80px rgba(79, 195, 247, 0.15);
+  opacity: 0;
+  animation: heroReveal 1.2s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--accent);
+  margin: 2rem auto;
+  opacity: 0;
+  animation: fadeSlideUp 1s 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.hero-tagline {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 1.15rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--white-muted);
+  opacity: 0;
+  animation: fadeSlideUp 1s 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 1s 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-scroll-indicator span {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--white-muted);
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  transform: rotate(45deg);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(40px) scale(0.96); letter-spacing: 30px; }
+  to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 12px; }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50% { transform: rotate(45deg) translateY(8px); opacity: 1; }
+}
+
+/* ============================================
+   SECTION SHARED STYLES
+   ============================================ */
+.section {
+  position: relative;
+  padding: 6rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-label {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  letter-spacing: 6px;
+  color: var(--white);
+}
+
+.section-line {
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+  margin: 1.5rem auto 0;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children */
+.reveal-stagger .reveal-child {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.visible .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   FEATURED VIDEO
+   ============================================ */
+.featured-section {
+  position: relative;
+  padding: 2rem 2rem 6rem;
+}
+
+.featured-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+
+.featured-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.featured-video-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(79, 195, 247, 0.1),
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 0 120px rgba(79, 195, 247, 0.05);
+}
+
+.featured-video-container::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, rgba(79,195,247,0.2), transparent 50%, rgba(79,195,247,0.1));
+  z-index: -1;
+}
+
+.featured-video-aspect {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: #000;
+}
+
+.featured-video-aspect iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.featured-caption {
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.featured-caption h3 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white-soft);
+}
+
+.featured-caption span {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--white-muted);
+}
+
+/* ============================================
+   VIDEO GRID
+   ============================================ */
+.videos-bg {
+  background: linear-gradient(180deg, var(--bg-deep) 0%, #080818 50%, var(--bg-deep) 100%);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.video-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid rgba(79, 195, 247, 0.06);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.video-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(79, 195, 247, 0.2);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(79, 195, 247, 0.08);
+}
+
+.video-card-media {
+  position: relative;
+  padding-bottom: 56.25%;
+  background: #000;
+  overflow: hidden;
+}
+
+.video-card-media iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-card-info {
+  padding: 1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.video-card-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.video-card:hover .video-card-icon {
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.video-card-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--accent);
+  transition: fill 0.3s;
+}
+
+.video-card:hover .video-card-icon svg {
+  fill: var(--bg-deep);
+}
+
+.video-card-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: var(--white-soft);
+  transition: color 0.3s;
+}
+
+.video-card:hover .video-card-title {
+  color: var(--white);
+}
+
+/* ============================================
+   SPOTIFY SECTION
+   ============================================ */
+.spotify-bg {
+  background: linear-gradient(180deg, var(--bg-deep) 0%, #0c0c24 50%, var(--bg-deep) 100%);
+  position: relative;
+}
+
+.spotify-bg::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 215, 96, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.spotify-embed-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(30, 215, 96, 0.1),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.spotify-embed-wrapper iframe {
+  display: block;
+  border: none;
+}
+
+/* ============================================
+   CONNECT SECTION
+   ============================================ */
+.connect-bg {
+  background: var(--bg-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.connect-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+}
+
+.connect-links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.connect-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--white-soft);
+  transition: all 0.4s;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.connect-link:hover {
+  color: var(--white);
+  border-color: rgba(79, 195, 247, 0.15);
+  background: rgba(79, 195, 247, 0.03);
+  transform: translateY(-4px);
+}
+
+.connect-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s;
+  position: relative;
+}
+
+.connect-link:hover .connect-icon {
+  background: rgba(79, 195, 247, 0.2);
+  box-shadow: 0 0 30px var(--accent-glow), 0 0 60px rgba(79, 195, 247, 0.15);
+}
+
+.connect-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: var(--accent);
+  transition: all 0.3s;
+}
+
+.connect-link:hover .connect-icon svg {
+  fill: var(--white);
+  transform: scale(1.1);
+}
+
+.connect-name {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.connect-handle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--white-muted);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  position: relative;
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+  border-top: 1px solid rgba(79, 195, 247, 0.06);
+}
+
+.footer-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 6px;
+  color: var(--white-muted);
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.footer-divider {
+  width: 30px;
+  height: 1px;
+  background: rgba(79, 195, 247, 0.3);
+  margin: 1.5rem auto;
+}
+
+.footer-copy {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 1px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 26, 0.97);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid rgba(79, 195, 247, 0.1);
+  }
+  .nav-hamburger { display: flex; }
+
+  .hero-title { letter-spacing: 6px; }
+  @keyframes heroReveal {
+    from { opacity: 0; transform: translateY(40px) scale(0.96); letter-spacing: 15px; }
+    to { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 6px; }
+  }
+
+  .section { padding: 4rem 1.25rem; }
+  .section-header { margin-bottom: 2.5rem; }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .connect-links { gap: 1.5rem; }
+  .connect-link { padding: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-overtitle { font-size: 0.7rem; letter-spacing: 5px; }
+  .hero-tagline { font-size: 0.9rem; letter-spacing: 4px; }
+  .section-label { font-size: 0.65rem; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   PARALLAX UTILITY
+   ============================================ */
+.parallax-slow {
+  will-change: transform;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">LARRY LUNT</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#spotify">Spotify</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero" id="hero">
+  <div class="stars"></div>
+  <div class="stars2"></div>
+  <div class="stars3"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-content parallax-slow">
+    <div class="hero-overtitle">Welcome to the music of</div>
+    <h1 class="hero-title">LARRY LUNT</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">A lifetime of music</p>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <span>Explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ============================================
+     FEATURED VIDEO
+     ============================================ -->
+<section class="featured-section" id="featured">
+  <div class="featured-wrapper reveal">
+    <div class="section-header">
+      <span class="section-label">Now Playing</span>
+      <h2 class="section-title">Featured</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="featured-video-container">
+      <div class="featured-video-aspect">
+        <iframe
+          src="https://www.youtube.com/embed/zqtZ3YP9qX0"
+          title="Smile (extended version) - Larry Lunt"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+    <div class="featured-caption">
+      <h3>Smile (Extended Version)</h3>
+      <span>Larry Lunt</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     MUSIC VIDEOS GRID
+     ============================================ -->
+<div class="videos-bg">
+  <section class="section" id="videos">
+    <div class="section-header reveal">
+      <span class="section-label">The Collection</span>
+      <h2 class="section-title">Music Videos</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="video-grid reveal-stagger" id="videoGrid">
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/pLlcxqnep4Y" title="Shoes" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Shoes</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/ewBfHpqvaQw" title="You Are Cordially Invited" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">You Are Cordially Invited</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/wMC-0q-0j-Y" title="Smile (short version)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Smile (Short Version)</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/zqtZ3YP9qX0" title="Smile (extended version)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Smile (Extended Version)</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/Jrz2yVo6AFE" title="Must Be Wrong" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Must Be Wrong</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/f4VI2pi1dik" title="One Leg Mama!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">One Leg Mama!</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/KDL-ENFiS58" title="Winston" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Winston</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/EqMSepq7OZU" title="I Feel Fine" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">I Feel Fine</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/9ZbCE4F6oDo" title="I Believe in Me" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">I Believe in Me</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/I-0oElUtXU4" title="Thank You Granny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Thank You Granny</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/2u-nlpzlXMc" title="25 Years with You" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">25 Years with You</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/v-YC-wKJAYE" title="Songs for Granny 90" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Songs for Granny 90</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/Fa_68G-tqcA" title="Sweet Somebody" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Sweet Somebody</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/Gr4HJhZqwTs" title="And Now" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">And Now</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/nkrdIDd6So4" title="Graduation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Graduation</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/3h49cWEJoXY" title="That's What I Like About You" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">That's What I Like About You</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/NQb9Xf3LY_c" title="Songs for Granny" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Songs for Granny</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/9XdA9DvdFu0" title="Relax Vax" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">Relax Vax</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal-child">
+        <div class="video-card-media">
+          <iframe src="https://www.youtube.com/embed/ssaoS4eFKj0" title="LouieLouie Animation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card-info">
+          <div class="video-card-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="video-card-title">LouieLouie Animation</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================
+     SPOTIFY
+     ============================================ -->
+<div class="spotify-bg">
+  <section class="section" id="spotify">
+    <div class="section-header reveal">
+      <span class="section-label">Stream</span>
+      <h2 class="section-title">Listen on Spotify</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="spotify-embed-wrapper reveal">
+      <iframe
+        src="https://open.spotify.com/embed/artist/4K75DMV5j6JKqAqKMCofi6?utm_source=generator&theme=0"
+        width="100%"
+        height="352"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        style="border-radius: 12px;"
+      ></iframe>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================
+     CONNECT
+     ============================================ -->
+<div class="connect-bg">
+  <section class="section" id="connect">
+    <div class="section-header reveal">
+      <span class="section-label">Stay in Touch</span>
+      <h2 class="section-title">Connect</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="connect-links reveal">
+
+      <a href="https://www.youtube.com/@louielouietv" target="_blank" rel="noopener noreferrer" class="connect-link">
+        <div class="connect-icon">
+          <!-- YouTube SVG -->
+          <svg viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </div>
+        <span class="connect-name">YouTube</span>
+        <span class="connect-handle">@louielouietv</span>
+      </a>
+
+      <a href="https://open.spotify.com/artist/4K75DMV5j6JKqAqKMCofi6" target="_blank" rel="noopener noreferrer" class="connect-link">
+        <div class="connect-icon">
+          <!-- Spotify SVG -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+          </svg>
+        </div>
+        <span class="connect-name">Spotify</span>
+        <span class="connect-handle">Larry Lunt</span>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="footer-name">LARRY LUNT</div>
+  <div class="footer-tagline">A lifetime of music</div>
+  <div class="footer-divider"></div>
+  <div class="footer-copy">&copy; 2026 Larry Lunt. Made with love.</div>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ---- Nav scroll effect ----
+  const nav = document.getElementById('nav');
+  let lastScroll = 0;
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    if (scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+    lastScroll = scrollY;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---- Mobile menu toggle ----
+  window.toggleMenu = function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  };
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ---- Intersection Observer for reveal animations ----
+  var revealOptions = {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+
+        // Stagger children
+        if (entry.target.classList.contains('reveal-stagger')) {
+          var children = entry.target.querySelectorAll('.reveal-child');
+          children.forEach(function(child, i) {
+            child.style.transitionDelay = (i * 0.07) + 's';
+          });
+        }
+
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, revealOptions);
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  // ---- Subtle parallax on hero content ----
+  var heroContent = document.querySelector('.hero-content');
+  var heroSection = document.querySelector('.hero');
+
+  function parallax() {
+    var scrollY = window.scrollY;
+    var heroHeight = heroSection.offsetHeight;
+    if (scrollY < heroHeight) {
+      var offset = scrollY * 0.3;
+      var opacity = 1 - (scrollY / heroHeight) * 1.2;
+      heroContent.style.transform = 'translateY(' + offset + 'px)';
+      heroContent.style.opacity = Math.max(opacity, 0);
+    }
+  }
+
+  window.addEventListener('scroll', parallax, { passive: true });
+
+})();
+</script>
+
+</body>
+</html>
